@@ -3,11 +3,10 @@ import Foundation
 /// Estimates ``OculusViseme``s from English spelling, for speech that comes with no viseme or
 /// phoneme timing (only text, a duration, or word start times).
 ///
-/// Our own rules, not a spec and not a pronunciation dictionary, ported from arenglisheducation's
-/// `VisemeScheduler.parseVisemes` (itself from the player SDK's `newCharacter` branch): per word,
-/// keep only the sounds the mouth shows most — the first letter, every vowel, the closed-lip
-/// letters m/b/p, and the digraphs sh/ch/th — and merge repeats. Letters are mapped straight to
-/// Oculus visemes. Expect rough shapes: spelling is not pronunciation.
+/// LipSyncKit's own rules, not a spec and not a pronunciation dictionary: per word, keep only the
+/// sounds the mouth shows most — the first letter, every vowel, the closed-lip letters m/b/p, and
+/// the digraphs sh/ch/th — and merge repeats. Letters map straight to Oculus visemes. Expect rough
+/// shapes: spelling is not pronunciation.
 public enum EnglishSpellingVisemes {
     /// The visemes of one word, in order. Empty for a word with no letters.
     public static func visemes(inWord word: String) -> [OculusViseme] {

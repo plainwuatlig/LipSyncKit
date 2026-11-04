@@ -1,0 +1,29 @@
+# Generates LipSyncKitSample.xcodeproj: `xcodegen generate` in this folder.
+# Signing is left to you: pick your team in Xcode, or pass DEVELOPMENT_TEAM=<team> to xcodebuild.
+name: LipSyncKitSample
+options:
+  bundleIdPrefix: com.example.lipsynckit
+  deploymentTarget:
+    iOS: "16.0"
+packages:
+  LipSyncKit:
+    path: ../..
+targets:
+  LipSyncKitSample:
+    type: application
+    platform: iOS
+    sources: [Sources]
+    dependencies:
+      - package: LipSyncKit
+        product: LipSyncKit
+      - package: LipSyncKit
+        product: LipSyncKitAVSpeech
+    settings:
+      base:
+        INFOPLIST_KEY_UILaunchScreen_Generation: YES
+        INFOPLIST_KEY_UIApplicationSceneManifest_Generation: YES
+        GENERATE_INFOPLIST_FILE: YES
+        INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone: "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight"
+        INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad: "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight"
+        CODE_SIGN_STYLE: Automatic
+        SWIFT_VERSION: "6.0"

@@ -1,0 +1,23 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+jobs:
+  test:
+    runs-on: macos-15
+    steps:
+      - uses: actions/checkout@v4
+      - name: Toolchain
+        run: |
+          xcodebuild -version
+          swift --version
+      - name: Test (macOS)
+        run: swift test
+      - name: Build the package for iOS
+        run: xcodebuild build -scheme LipSyncKit-Package -destination 'generic/platform=iOS' -quiet
+      - name: Build the sample app for iOS
+        working-directory: Examples/LipSyncKitSample
+        run: xcodebuild build -project LipSyncKitSample.xcodeproj -scheme LipSyncKitSample -destination 'generic/platform=iOS' CODE_SIGNING_ALLOWED=NO -quiet
